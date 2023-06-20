@@ -1,0 +1,201 @@
+<template #content>
+  <v-layout>
+    <v-app-bar title="&nbsp;">
+      <v-snackbar v-model="snackbar" :timeout="3000" color="success" location="top">
+        Order has been updated
+      </v-snackbar>
+      <div class="tool_btns">
+        <v-btn variant="text" />
+        <v-btn variant="text" append-icon="mdi-chevron-down" class="mr-2">
+          <v-avatar size="x-small" class="avatarmr-2">
+            <v-img src="@/assets/yubi.png" alt="user"></v-img>
+          </v-avatar>
+          <span><strong>USER</strong></span>
+          <v-menu activator="parent">
+            <v-list nav class="h_a_menu">
+              <v-list-item title="Logout" prepend-icon="mdi-login" @click="logout()" />
+            </v-list>
+          </v-menu>
+        </v-btn>
+      </div>
+    </v-app-bar>
+    <v-main>
+      <div style="position: relative">
+        <v-row class="mx-5 mt-4">
+          <v-responsive style="max-height: 90vh;">
+            <v-card>
+              <v-row>
+                <v-col md="12" sm="12" lg="12" class="text-right">
+                  <v-card-title>Date: {{ timestamp }}</v-card-title>
+                </v-col>
+              </v-row>
+            </v-card>
+            <div class="tableFixHead">
+              <table ref="scrollToMe">
+                <thead style="position:sticky;top:0%;background-color:#333;color:#fff;">
+                  <tr>
+                    <th>
+                      <h1>Group</h1>
+                    </th>
+                    <th>
+                      <h1>Menu</h1>
+                    </th>
+                    <th>
+                      <h1>Order</h1>
+                    </th>
+                    <th>
+                      <h1>Out</h1>
+                    </th>
+                    <th>
+                      <h1>On Progress</h1>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody v-if="SalesOrder.length > 0">
+                  <tr v-for="row in SalesOrder" :key="row.id">
+                    <td>
+                      <h2>{{ row.group }}</h2>
+                    </td>
+                    <td>
+                      <h2>{{ row.menu }}</h2>
+                    </td>
+                    <td style="text-align: center;">
+                      <h2>{{ row.total_qty }}</h2>
+                    </td>
+                    <td style="text-align: center;">
+                      <h2>{{ row.total_on_done }}</h2>
+                    </td>
+                    <td style="text-align: center;">
+                      <h2>{{ row.total_qty - row.total_on_done }}</h2>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody v-else>
+                  <tr style="text-align: center;">
+                    <td colspan="5">
+                      <h2>No Order</h2>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </v-responsive>
+        </v-row>
+      </div>
+    </v-main>
+  </v-layout>
+</template>
+<script>
+
+import $axios from "@/plugins/api.js";
+import { mapGetters, mapMutations } from "vuex";
+import MainLayout from "../layouts/MainLayout.vue";
+
+export default {
+  name: "HomeView",
+  components: {
+    MainLayout,
+  },
+  data() {
+    return {
+      tab: null,
+      order_date: null,
+      snackbar: false,
+      timestamp: "",
+      scrollcuy: false,
+    };
+  },
+  methods: {
+    ...mapMutations("sales_order", ["SET_SALES_ORDER"]),
+    async getSalesOrder() {
+      await $axios
+        .get("/kds/sales-orders", {
+          headers: {
+            Authorization: `Bearer ${this.$store.getters["auth/Token"]}`,
+          },
+        })
+        .then(({ data }) => {
+          this.SET_SALES_ORDER(data.kitchen_displays.data);
+          this.order_date = data.kitchen_displays.order_date;
+        })
+    },
+    getNow: function () {
+      const today = new Date();
+      const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+      const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      const dateTime = date + ' | ' + time;
+      this.timestamp = dateTime;
+    },
+    logout() {
+      this.$store.dispatch("auth/logout");
+      this.$router.push("/login");
+    },
+    scrollToElement() {
+      const el = this.$refs.scrollToMe;
+      setInterval(() => {
+        const el = this.$refs.scrollToMe;
+        const maxScrollTop = el.scrollHeight - el.clientHeight;
+        const currentScrollTop = el.scrollTop;
+        if (currentScrollTop === maxScrollTop) {
+          el.scrollIntoView({ behavior: "smooth", block: 'end' });
+        } else {
+          el.scrollIntoView({ behavior: "smooth", block: 'start' });
+        }
+      }, 50);
+      setInterval(() => {
+        const el = this.$refs.scrollToMe;
+        this.scrollcuy = !this.scrollcuy;
+        if (el && this.scrollcuy) {
+          el.scrollIntoView();
+        } else {
+          el.scrollIntoView({ behavior: "smooth", block: "end" });
+        }
+      }, 12000);
+    },
+  },
+  computed: {
+    ...mapGetters("sales_order", ["SalesOrder"]),
+    ...mapGetters("auth", ["User"]),
+  },
+  created() {
+    this.getSalesOrder();
+    setInterval(this.getNow, 1000)
+  },
+  mounted() {
+    window.Echo.channel(`branch.${this.User.branch_id}`).listen('SalesOrderUpdated', (e) => {
+      console.log('go branch');
+      this.getSalesOrder();
+      this.snackbar = true;
+    })
+    this.scrollToElement();
+  }
+};
+</script>
+<style>
+.tableFixHead {
+  overflow-y: auto;
+  height: calc(100vh - 15%);
+}
+
+.tableFixHead thead th {
+  position: sticky;
+  top: 0px;
+  background-color: #7BC2FF;
+}
+
+table {
+  border-collapse: collapse;
+  /* make the table borders collapse to each other */
+  width: 100%;
+}
+
+th,
+td {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+}
+
+th {
+  background: #eee;
+}
+</style>
