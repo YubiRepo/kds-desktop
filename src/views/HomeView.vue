@@ -1,8 +1,6 @@
 <template #content>
   <v-layout>
-<<<<<<< HEAD
-=======
-    <v-app-bar title="&nbsp;">
+    <!-- <v-app-bar title="&nbsp;">
       <v-snackbar v-model="snackbar" :timeout="3000" color="success" location="top">
         Order has been updated
       </v-snackbar>
@@ -10,7 +8,6 @@
         <v-btn variant="text" />
         <v-btn variant="text" append-icon="mdi-chevron-down" class="mr-2">
           <v-avatar size="x-small" class="avatarmr-2">
-            <v-img src="@/assets/yubi.png" alt="user"></v-img>
           </v-avatar>
           <span><strong>USER</strong></span>
           <v-menu activator="parent">
@@ -20,8 +17,7 @@
           </v-menu>
         </v-btn>
       </div>
-    </v-app-bar>
->>>>>>> 5e29ebae3946e5d4f3bbbf6aef4ed944dec725c4
+    </v-app-bar> -->
     <v-main>
       <div style="position: relative">
         <v-row class="mx-5 mt-4">
@@ -55,7 +51,6 @@
                   </tr>
                 </thead>
                 <tbody v-if="SalesOrder.length > 0">
-<<<<<<< HEAD
                   <tr v-for="row in SalesOrder" :key="row.id" v-if="SalesOrder != 'Not Found'">
                     <td v-if="row.jumlah != row.selisih">
                       <h2>{{ row.groupname }}</h2>
@@ -71,8 +66,9 @@
                     </td>
                     <td v-if="row.jumlah != row.selisih" style="text-align: center;">
                       <h2>{{ row.jumlah - row.selisih }}</h2>
-=======
-                  <tr v-for="row in SalesOrder" :key="row.id">
+                    </td>
+                  </tr>
+                  <!-- <tr v-for="row in SalesOrder" :key="row.id">
                     <td>
                       <h2>{{ row.group }}</h2>
                     </td>
@@ -87,9 +83,8 @@
                     </td>
                     <td style="text-align: center;">
                       <h2>{{ row.total_qty - row.total_on_done }}</h2>
->>>>>>> 5e29ebae3946e5d4f3bbbf6aef4ed944dec725c4
                     </td>
-                  </tr>
+                  </tr> -->
                 </tbody>
                 <tbody v-else>
                   <tr style="text-align: center;">
@@ -120,42 +115,22 @@ export default {
   data() {
     return {
       tab: null,
-      order_date: null,
       snackbar: false,
       timestamp: "",
       scrollcuy: false,
     };
   },
-<<<<<<< HEAD
 
-  created() {
-    this.getSalesOrder();
-    this.countDownTimer();
-    setInterval(this.getNow, 1000)
-  },
-
-=======
->>>>>>> 5e29ebae3946e5d4f3bbbf6aef4ed944dec725c4
   methods: {
     ...mapMutations("sales_order", ["SET_SALES_ORDER"]),
     async getSalesOrder() {
       await $axios
-<<<<<<< HEAD
         .get("http://192.168.1.250:8081/apporder/api/kdsitem", {
         })
         .then(({ data }) => {
           this.SET_SALES_ORDER(data.KDS);
-=======
-        .get("/kds/sales-orders", {
-          headers: {
-            Authorization: `Bearer ${this.$store.getters["auth/Token"]}`,
-          },
-        })
-        .then(({ data }) => {
-          this.SET_SALES_ORDER(data.kitchen_displays.data);
-          this.order_date = data.kitchen_displays.order_date;
->>>>>>> 5e29ebae3946e5d4f3bbbf6aef4ed944dec725c4
-        })
+          this.loading = false;
+        });
     },
     getNow: function () {
       const today = new Date();
@@ -168,6 +143,7 @@ export default {
       this.$store.dispatch("auth/logout");
       this.$router.push("/login");
     },
+
     scrollToElement() {
       const el = this.$refs.scrollToMe;
       setInterval(() => {
@@ -190,35 +166,30 @@ export default {
         }
       }, 12000);
     },
-<<<<<<< HEAD
 
     countDownTimer() {
       setInterval(() => {
         this.getSalesOrder()
-      }, 5000)
+      }, 10000)
     },
-=======
->>>>>>> 5e29ebae3946e5d4f3bbbf6aef4ed944dec725c4
   },
   computed: {
     ...mapGetters("sales_order", ["SalesOrder"]),
     ...mapGetters("auth", ["User"]),
   },
-<<<<<<< HEAD
-=======
   created() {
+    this.countDownTimer();
     this.getSalesOrder();
     setInterval(this.getNow, 1000)
   },
   mounted() {
-    window.Echo.channel(`branch.${this.User.branch_id}`).listen('SalesOrderUpdated', (e) => {
+    window.Echo.channel(`branch.${this.User}`).listen('SalesOrderUpdated', (e) => {
       console.log('go branch');
       this.getSalesOrder();
       this.snackbar = true;
     })
     this.scrollToElement();
   }
->>>>>>> 5e29ebae3946e5d4f3bbbf6aef4ed944dec725c4
 };
 </script>
 <style>
@@ -235,10 +206,7 @@ export default {
 
 table {
   border-collapse: collapse;
-<<<<<<< HEAD
-=======
   /* make the table borders collapse to each other */
->>>>>>> 5e29ebae3946e5d4f3bbbf6aef4ed944dec725c4
   width: 100%;
 }
 

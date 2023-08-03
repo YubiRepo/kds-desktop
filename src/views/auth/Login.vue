@@ -61,17 +61,11 @@ export default {
     ...mapActions("auth", ["submit"]),
 
     handleLogin() {
-<<<<<<< HEAD
-      this.submit(this.form_login).then((res) => {
-        if (res.status) {
-          this.$router.push("/home");
-=======
       this.btnLoading = true;
       this.submit(this.form_login).then(() => {
         if (this.$store.getters["auth/Authenticated"]) {
           this.$router.push("/home");
           this.btnLoading = false;
->>>>>>> 5e29ebae3946e5d4f3bbbf6aef4ed944dec725c4
         }
       });
     },

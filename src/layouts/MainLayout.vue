@@ -2,9 +2,6 @@
   <v-app id="inspire">
     <slot name="content"></slot>
   </v-app>
-<<<<<<< HEAD
-</template>
-=======
 </template>
 
 <script>
@@ -17,4 +14,3 @@ export default {
   },
 };
 </script>
->>>>>>> 5e29ebae3946e5d4f3bbbf6aef4ed944dec725c4
