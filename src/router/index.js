@@ -3,7 +3,7 @@ import store from '../store'
 const routes = [
   {
     path: '/',
-    redirect: '/login'
+    redirect: '/home'
   },
 
   {

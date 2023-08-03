@@ -17,10 +17,7 @@ const mutations = {
 }
 
 const getters = {
-    SalesOrder(state) {
-        return state.sales_order;
-
-    },
+    SalesOrder : state => state.sales_order,
 }
 
 
