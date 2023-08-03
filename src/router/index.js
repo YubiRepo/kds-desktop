@@ -3,18 +3,31 @@ import store from '../store'
 const routes = [
   {
     path: '/',
+<<<<<<< HEAD
     redirect: '/home'
   },
 
   {
     path: '/home',
     name: 'home',
+=======
+    redirect: '/login'
+  },
+
+  {
+    path: '/login',
+    name: 'login',
+>>>>>>> 5e29ebae3946e5d4f3bbbf6aef4ed944dec725c4
     meta: {
       title: 'KDS',
       icon: 'mdi-account',
       visible: true,
     },
+<<<<<<< HEAD
     component: () => import('@/views/HomeView')
+=======
+    component: () => import('../views/auth/Login.vue')
+>>>>>>> 5e29ebae3946e5d4f3bbbf6aef4ed944dec725c4
   },
 
   {
