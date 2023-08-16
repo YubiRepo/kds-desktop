@@ -68,23 +68,6 @@
                       <h2>{{ row.jumlah - row.selisih }}</h2>
                     </td>
                   </tr>
-                  <!-- <tr v-for="row in SalesOrder" :key="row.id">
-                    <td>
-                      <h2>{{ row.group }}</h2>
-                    </td>
-                    <td>
-                      <h2>{{ row.menu }}</h2>
-                    </td>
-                    <td style="text-align: center;">
-                      <h2>{{ row.total_qty }}</h2>
-                    </td>
-                    <td style="text-align: center;">
-                      <h2>{{ row.total_on_done }}</h2>
-                    </td>
-                    <td style="text-align: center;">
-                      <h2>{{ row.total_qty - row.total_on_done }}</h2>
-                    </td>
-                  </tr> -->
                 </tbody>
                 <tbody v-else>
                   <tr style="text-align: center;">
@@ -155,7 +138,7 @@ export default {
         } else {
           el.scrollIntoView({ behavior: "smooth", block: 'start' });
         }
-      }, 50);
+      }, 38);
       setInterval(() => {
         const el = this.$refs.scrollToMe;
         this.scrollcuy = !this.scrollcuy;
@@ -164,7 +147,7 @@ export default {
         } else {
           el.scrollIntoView({ behavior: "smooth", block: "end" });
         }
-      }, 12000);
+      }, 11000);
     },
 
     countDownTimer() {
