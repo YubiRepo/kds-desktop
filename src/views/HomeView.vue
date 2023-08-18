@@ -108,7 +108,7 @@ export default {
     ...mapMutations("sales_order", ["SET_SALES_ORDER"]),
     async getSalesOrder() {
       await $axios
-        .get("http://192.168.1.250:8081/apporder/api/kdsitem", {
+        .get("/apporder/api/kdsitem", {
         })
         .then(({ data }) => {
           this.SET_SALES_ORDER(data.KDS);
