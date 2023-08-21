@@ -33,19 +33,19 @@
               <table ref="scrollToMe">
                 <thead style="position:sticky;top:0%;background-color:#333;color:#fff;">
                   <tr>
-                    <th>
+                    <th width="20%;">
                       <h1>Group</h1>
                     </th>
-                    <th>
+                    <th width="30%;">
                       <h1>Menu</h1>
                     </th>
-                    <th>
+                    <th width="15%;">
                       <h1>Order</h1>
                     </th>
-                    <th>
+                    <th width="15%;">
                       <h1>Out</h1>
                     </th>
-                    <th>
+                    <th width="15%;">
                       <h1>On Progress</h1>
                     </th>
                   </tr>
