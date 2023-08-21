@@ -36,16 +36,16 @@
                     <th width="20%;">
                       <h1>Group</h1>
                     </th>
-                    <th width="30%;">
+                    <th width="35%;">
                       <h1>Menu</h1>
                     </th>
-                    <th width="15%;">
+                    <th width="12%;">
                       <h1>Order</h1>
                     </th>
-                    <th width="15%;">
+                    <th width="12%;">
                       <h1>Out</h1>
                     </th>
-                    <th width="15%;">
+                    <th width="12%;">
                       <h1>On Progress</h1>
                     </th>
                   </tr>
@@ -196,7 +196,7 @@ table {
 th,
 td {
   padding: 8px 16px;
-  border: 1px solid #ccc;
+  border: 1px solid black;
 }
 
 th {
