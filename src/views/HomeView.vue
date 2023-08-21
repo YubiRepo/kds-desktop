@@ -196,7 +196,11 @@ table {
 th,
 td {
   padding: 8px 16px;
-  border: 1px solid black;
+  border: 2px solid black;
+}
+
+.Bold {
+  font-weight: bold;
 }
 
 th {
