@@ -52,19 +52,37 @@
                 </thead>
                 <tbody v-if="SalesOrder.length > 0">
                   <tr v-for="row in SalesOrder" :key="row.id" v-if="SalesOrder != 'Not Found'">
-                    <td v-if="row.jumlah != row.selisih">
+                    <td v-if="row.jumlah != row.selisih && row.selisih == 0" style="background-color: red;">
                       <h2>{{ row.groupname }}</h2>
                     </td>
-                    <td v-if="row.jumlah != row.selisih">
+                    <td v-else>
+                      <h2>{{ row.groupname }}</h2>
+                    </td>
+                    <td v-if="row.jumlah != row.selisih && row.selisih == 0" style="background-color: red;">
                       <h2>{{ row.menuname }}</h2>
                     </td>
-                    <td v-if="row.jumlah != row.selisih" style="text-align: center;">
+                    <td v-else>
+                      <h2>{{ row.menuname }}</h2>
+                    </td>
+                    <td v-if="row.jumlah != row.selisih && row.selisih == 0"
+                      style="text-align: center;background-color: red;">
                       <h2>{{ row.jumlah }}</h2>
                     </td>
-                    <td v-if="row.jumlah != row.selisih" style=" text-align: center;">
+                    <td v-else style=" text-align: center;">
+                      <h2>{{ row.jumlah }}</h2>
+                    </td>
+                    <td v-if="row.jumlah != row.selisih && row.selisih == 0"
+                      style=" text-align: center;background-color: red;">
                       <h2>{{ row.selisih }}</h2>
                     </td>
-                    <td v-if="row.jumlah != row.selisih" style="text-align: center;">
+                    <td v-else style=" text-align: center;">
+                      <h2>{{ row.selisih }}</h2>
+                    </td>
+                    <td v-if="row.jumlah != row.selisih && row.selisih == 0"
+                      style="text-align: center;background-color: red;">
+                      <h2>{{ row.jumlah - row.selisih }}</h2>
+                    </td>
+                    <td v-else style=" text-align: center;">
                       <h2>{{ row.jumlah - row.selisih }}</h2>
                     </td>
                   </tr>
