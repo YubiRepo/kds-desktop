@@ -156,7 +156,7 @@ export default {
         } else {
           el.scrollIntoView({ behavior: "smooth", block: 'start' });
         }
-      }, 38);
+      }, 40);
       setInterval(() => {
         const el = this.$refs.scrollToMe;
         this.scrollcuy = !this.scrollcuy;
@@ -165,7 +165,7 @@ export default {
         } else {
           el.scrollIntoView({ behavior: "smooth", block: "end" });
         }
-      }, 11000);
+      }, 10000);
     },
 
     countDownTimer() {
