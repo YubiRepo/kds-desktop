@@ -165,7 +165,7 @@ export default {
         } else {
           el.scrollIntoView({ behavior: "smooth", block: "end" });
         }
-      }, 40_000);
+      }, 60_000);
     },
 
     countDownTimer() {
