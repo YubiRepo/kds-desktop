@@ -2,7 +2,7 @@ import axios from 'axios';
 import store from '@/store'
 
 const $axios = axios.create({
-    baseURL: 'http://192.168.1.250:8081',
+    baseURL: import.meta.env.VITE_APP_API_URL,
 });
 
 $axios.interceptors.request.use(
