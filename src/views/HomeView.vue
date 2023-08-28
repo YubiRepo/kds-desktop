@@ -152,11 +152,11 @@ export default {
         const maxScrollTop = el.scrollHeight - el.clientHeight;
         const currentScrollTop = el.scrollTop;
         if (currentScrollTop === maxScrollTop) {
-          el.scrollIntoView({ behavior: "smooth", block: 'end' });
+          el.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
         } else {
-          el.scrollIntoView({ behavior: "smooth", block: 'start' });
+          el.scrollIntoView({ behavior: "smooth", block: "end" });
         }
-      }, 40);
+      }, 37);
       setInterval(() => {
         const el = this.$refs.scrollToMe;
         this.scrollcuy = !this.scrollcuy;
@@ -165,13 +165,13 @@ export default {
         } else {
           el.scrollIntoView({ behavior: "smooth", block: "end" });
         }
-      }, 10000);
+      }, 40_000);
     },
 
     countDownTimer() {
       setInterval(() => {
         this.getSalesOrder()
-      }, 10000)
+      }, 10_000)
     },
   },
   computed: {
